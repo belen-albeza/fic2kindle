@@ -1,0 +1,35 @@
+h1. fic2kindle
+
+This script shows how to parse a website and generate an ebook for Kindle (MOBI format). It uses Ruby, Nokogiri (XML parser) and Amazon's kindlegen tool.
+
+Currently it feches stories from fanfiction.net (can work on fictionpress.com and sites that use the same CMS software). If you want to extend this script to parse more complex websites, take a look at Mechanize http://mechanize.rubyforge.org/mechanize/
+
+h2. IMPORTANT WARNING
+
+Although the purpose of this program is merely educative, it does actually fetch content from fanfiction.net. Even though fan fiction works violates, by definition, copyright laws, most fan fiction writers don't want their stories published elsewhere. Please respect this.
+
+Also note that fanfiction.net TOS establish that:
+
+bq. E. You agree not to use or launch any automated system, including without limitation, "robots," "spiders," or "offline readers," that accesses the Website in a manner that sends more request messages to the FanFiction.Net servers in a given period of time than a human can reasonably produce in the same period by using a conventional on-line web browser.
+
+To comply with this, the script makes a 30 seconds pause between GET requests. Please see the source code in both @fic2kindle.rb@ and @leecher.rb@ for details.
+
+h1. Requirements
+
+* Ruby 1.9
+* Nokogiri gem http://www.nokogiri.org
+* Amazon's kindlegen http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000234621, installed in a location available in your PATH
+
+h1. Use
+
+The script takes 3 parameters as inpyut (in this order):
+
+# ID of the story that is going to be fetched from fanfiction.net
+# Start chapter (number, starting from 1)
+# End chapter (number, inclusive)
+
+Example:
+
+<pre>
+$ ruby fic2kindle.rb 4673929 1 3 	
+</pre>
