@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<%# -*- coding: UTF-8 -*- %>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   The unique identifier in <package unique-identifier=”XYZ”> is a reference to
   the identifier specified in <metadata> as <dc:Identifier id=”XYZ”>.
@@ -37,19 +38,6 @@
        creator  elements should be named in contributor elements.
   -->
 	<dc:creator><%= author %></dc:creator>
-  
-  <!-- Publisher: An entity responsible for making the resource available -->
-  
-	<dc:publisher><%= publisher %></dc:publisher>
-  
-  
-  <!-- Date: Date of publication in YYYY-MM-DD format. (Days and month can be omitted).
-       Standard to follow: http://www.w3.org/TR/NOTE-datetime
-  -->
-	<dc:date><%= pub_date %></dc:date>
-
-  <!-- Description: A short description of the publication's content. -->
-  <dc:description><%= description %></dc:description>
 	
 </metadata>
 
@@ -70,14 +58,22 @@
 -->
 
 <manifest>
+	<item id="item-toc" media-type="text/x-oeb1-document" href="<%= toc %>"></item>
+	
 	<% chapters.each_with_index do |chapter, index| %>
-		<item id="item<%= index %>" media-type="application/xhtml+xml" href="<%= chapter %>"></item>
+		<item id="item<%= index %>" media-type="text/x-oeb1-document" href="<%= chapter %>"></item>
 	<% end %>
 	
 	<spine>
+		<itemref idref="item-toc"/>
 		<% chapters.each_index do |index| %>
 			<itemref idref="item<%= index %>"/>
 		<% end %>
 	</spine>
 </manifest>
+
+<guide>
+	<reference type="toc" title="Table of Contents" href="<%= toc %>"></reference>
+	<reference type="text" title="Beginning" href="<%= chapters.first %>"></reference>
+</guide>
 </package>
