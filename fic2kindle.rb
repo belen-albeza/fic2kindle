@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'tempfile'
 
-require 'leecher'
+require_relative 'leecher'
 
 if ARGV.size != 3
   puts "ERROR. Use: ruby fic2kindle.rb STORY_ID START_CHAPTER END_CHAPTER"

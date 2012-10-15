@@ -74,7 +74,7 @@ class Leecher
     })
         
     puts "Generating ebook..."
-    puts `kindlegen book.opf -unicode`
+    puts `kindlegen book.opf`
     
     cleanup
   end
@@ -92,9 +92,9 @@ class Leecher
   def leech_story_info
     doc = Nokogiri::HTML(open("#{FicSourceURL}/s/#{@fic_id}"), "UTF-8")    
     # get author name
-    author = doc.xpath("//body/div[13]/table[1]//a").first.inner_text
+    author = doc.xpath("//table[@id='gui_table1i']/tbody/tr[@class='alt2']/td/a[1]").first.inner_text
     # get story title
-    title = doc.xpath("//body/div[13]/div[1]//b").first.inner_text
+    title = doc.xpath("//table[@id='gui_table1i']/tbody[1]/tr[1]/td[1]/b[1]").first.inner_text
     
     {:title => title, :author => author}
   end
